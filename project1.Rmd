@@ -1,0 +1,143 @@
+---
+title: "R_project1"
+output: html_document
+date: "2024-12-20"
+---
+```{css, echo=FALSE}  
+body {  
+  font-size: 18px;  /* Change this value to your preferred font size */  
+}  
+```
+<style>
+p { direction:rtl;}
+</style>
+
+### Question 1: Check the years of service information in the Salaries dataframe
+```{r}
+my.id<-36
+set.seed(my.id)
+```
+
+ابتدا با داده های Salaries آشنایی اولیه بدست می‌آوریم.
+```{r setup}
+library(car)
+data("Salaries")
+str(Salaries)
+library(DT)
+datatable(Salaries)
+```
+
+شاخص های تمرکز:
+
+```{r}
+S<-Salaries$yrs.service
+mean(S)
+median(S)
+```
+
+شاخص های پراکندگی:
+
+```{r}
+sd(S)
+var(S)
+max(S)-min(S)
+```
+چارک ها:
+```{r}
+summary(S)
+quantile(S,p=c(0.25,0.5,0.75))
+```
+تفسیر چارک اول:
+یعنی عدد ۷ از ۲۵٪داده ها بزرگتر است به عبارت دیگر\n\
+$P(S<7)=0.25$\n\
+تفسیر چارک دوم:
+یعنی عدد ۱۶ از ۵۰٪داده ها بزرگتر است به عبارت دیگر\n\
+$P(S<16)=0.5$\n\
+تفسیر چارک سوم:
+یعنی عدد ۲۷ از ۷۵٪داده ها بزرگتر است به عبارت دیگر\n\
+$P(S<27)=0.75$\n\
+چولگی و کشیدگی:
+```{r warning=FALSE}
+library(e1071)
+skewness(S) 
+kurtosis(S)
+library(ggplot2)
+ggplot(data.frame(S),aes(x=S))+geom_histogram(aes(y= ..density..),bins = 20, fill = "blue", alpha=0.5)+
+  stat_function(fun = dnorm, args = list(mean=mean(S),sd=sd(S)) ,color="red", size=1)+
+  labs(title="Histogram of data and normal curve" , x="years of service")
+
+```
+\n\
+با بدست آوردن کشیدگی و چولگی داده ها و همچنین بررسی هیستوگرام آن با منحنی نرمال به این نتیجه میرسیم که داده ها چوله به راست هستند و کشیدگی کمتر از نرمال و در نتیجه پخ تر است. \n\
+
+### Question 2 : Check rank and salary diagram for an example of Salaries dataframe
+```{r}
+set.seed(my.id) 
+sample_data <- sample(nrow(Salaries), my.id)  
+sample_dfr <- Salaries[sample_data ,]  
+knitr::kable(sample_dfr)
+library(ggplot2)
+ggplot(sample_dfr , aes(x=yrs.service , y=salary , shape = rank , color=rank))+ 
+  geom_point(size=3)+
+  labs(x="years of service" , y="nine-month salary")
+ggplot(sample_dfr , aes(x=rank , fill = sex))+geom_bar()
+ggplot(sample_dfr , aes(x=salary))+geom_histogram(bins = 15 , color="red")
+
+
+```
+
+### Question 3 :Random number generation and recognition of numbers that are multiples of 6
+
+```{r}
+set.seed(my.id)
+Random<-rnorm(100, 50 , 10)
+Random2<-round(Random)
+l<-length(Random2)
+for (x in 1:l){
+  if (Random2[x]%%6==0){
+    print(Random2[x])
+  }
+}
+
+```
+
+### Question 4 : Define the function
+
+$f(x)=\frac{n}{\sum\frac{1}{x}}$
+```{r}
+f<-function(d){
+  length(d)/sum(1/d)
+}
+data<-Salaries$salary
+f(data)
+```
+
+### Question 5 : Integral calculation
+
+```{r}
+g<-function(x){
+  x^2+1
+}
+integrate(g, lower =0.5  , upper =3 )
+
+library(pracma)
+h<-function(x,y){
+  x+(y^2)-1
+}
+integral2(h,xmin =3 ,xmax =5 ,ymin =0 ,ymax =1)
+```
+
+### Question 6 : Calculation of determinant, inverse and change of diameter in the matrix
+
+```{r}
+A<-matrix(c(1,2,4,6,1,3,9,5,3),ncol = 3,byrow = T)
+A
+det(A)
+solve(A)
+```
+```{r}
+diag(A)<-c(0,0,0)
+A
+```
+
+
