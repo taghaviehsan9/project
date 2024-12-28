@@ -1,0 +1,52 @@
+---
+title: "project2"
+output: html_document
+date: "2024-12-28"
+---
+# Question1
+
+$P(X=4)$
+
+```{r setup}
+dbinom(4,5,0.5)
+```
+$P(X\geqslant3)=1-F_X (2)$
+```{r}
+1- pbinom(2,5,0.5)
+```
+
+$P(X=0)$
+```{r}
+dbinom(0,5,0.5)
+```
+
+# Question2
+
+$F_Y(y)=1-(1-F_X(y))(1-F_X(y))$
+```{r}
+Fx <- function(x,k){
+  ifelse(x<1,0, ifelse(x<=k, floor(x)/k,1))
+}
+```
+$P(Y<5)=F_Y(4)$
+```{r}
+1-((1-Fx(4,6))^2)
+```
+$P(Y=1)=F_Y(1)$
+```{r}
+1-((1-Fx(1,6))^2)
+```
+$P(Y\leqslant2)=F_Y(2)$
+```{r}
+1-((1-Fx(2,6))^2)
+```
+
+# Question3
+$P(W=2)$
+```{r}
+dbinom(2,2,5/24)
+```
+P(یکسان نباشد)=1-P(یکسان باشد)
+```{r}
+1- (dbinom(3,3,5/24)+dbinom(3,3,7/24)+dbinom(3,3,12/24))
+```
