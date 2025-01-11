@@ -1,0 +1,81 @@
+---
+title: "final_project"
+output: html_document
+date: "2025-01-11"
+---
+
+### Network analysis
+This graph is based on information obtained from the two -day flights of the most busy airports in Iran, and the number is shown to be the number of times selected as destination.
+
+
+```{r}
+library(igraph)
+library(readxl)
+set.seed(16)
+url <- "https://github.com/taghaviehsan9/project/raw/refs/heads/main/parvaz.xlsx"  
+download.file(url, destfile = "my_data.xlsx", mode = "wb")  
+data <- read_excel("my_data.xlsx")
+y <- data.frame(data$from , data$to)
+net <- graph.data.frame(y, directed=T)
+V(net)
+E(net)
+
+vertex_labels <- paste(V(net)$name, "\ndestination: ", degree(net, mode = "in"))
+
+plot(net,
+     vertex.color = rainbow(10),
+     vertex.size = degree(net, mode = "in") * 0.4,
+     edge.arrow.size = 0.1,
+     layout = layout.fruchterman.reingold,
+     vertex.label = vertex_labels,  
+     vertex.label.cex = 0.7,        
+     vertex.label.color = "black")
+```
+
+
+### Image processing
+
+```{r}
+library(magick)
+image_url <- "https://github.com/taghaviehsan9/project/blob/main/1403-10-22%2017.45.44.jpg?raw=true"
+img <- image_read(image_url)
+image <- image_scale(img, "x400")  
+image1<-image_annotate(image, "The grade of the \n statistical lab course:  20", size = 30, gravity = "southwest", color = "violet", font = "Arial Unicode MS")
+image_url2<-"https://github.com/taghaviehsan9/project/blob/main/1403-10-22%2017.46.25.jpg?raw=true"
+img2<-image_read(image_url2)
+image2 <- image_scale(img2, "x400") 
+gallery<-c(image2,image1)
+image_animate(image_scale(gallery, "400x400"), fps = 1, dispose = "previous")
+```
+
+### word cloud
+
+```{r}
+library("tm")
+library("SnowballC")
+library("wordcloud2")
+library("RColorBrewer")
+text <- readLines("https://raw.githubusercontent.com/taghaviehsan9/project/refs/heads/main/CV.txt")
+docs <- Corpus(VectorSource(text))
+inspect(docs)
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+docs <- tm_map(docs, toSpace, "/")
+docs <- tm_map(docs, toSpace, "@")
+docs <- tm_map(docs, toSpace, "\\|")
+docs <- tm_map(docs, content_transformer(tolower))
+docs <- tm_map(docs, removeNumbers)
+docs <- tm_map(docs, removeWords, stopwords("english"))
+docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+docs <- tm_map(docs, removePunctuation)
+docs <- tm_map(docs, stripWhitespace)
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 10)
+set.seed(16)
+wordcloud2(data = d, size = 0.3, minSize = 0.5, shape = "star")  
+
+```
+
+
