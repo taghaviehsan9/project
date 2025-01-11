@@ -1,0 +1,21 @@
+Ehsan Taghavi
+Objective
+I am a dedicated and motivated statistics student eager to bridge theory and practice in the fields of data science and actuarial science. With a solid foundation in probability, statistical inference, and data analysis, I aim to contribute effectively as a junior data analyst. I am particularly interested in leveraging advanced analytical tools and data visualization techniques to derive insights from data, optimize decision-making processes, and support business objectives.
+ 
+Education
+Bachelor of Science in Statistics
+Ferdowsi University of mashhad
+As a current student in the 5th semester of my statistics program, I have developed a robust understanding of key statistical concepts and methodologies. My coursework includes:
+•	Basics of Probability: Gained a strong grasp of probability theory, focusing on concepts such as probability distributions, expected values, and the law of large numbers.
+•	Statistical Inference and Estimation: Developed skills in hypothesis testing, confidence intervals, and estimation techniques, applying these concepts to real-world datasets.
+•	Random Processes: Explored stochastic processes and their applications, enhancing my ability to model and analyze random events in various contexts.
+•	Statistical Laboratory with R: Engaged in hands-on data analysis projects using R, where I applied statistical techniques to draw meaningful conclusions from complex datasets.
+Overall, my academic journey has equipped me with the analytical and problem-solving skills necessary to excel in data-driven environments.
+ 
+Technical Skills
+•	Statistical Software: Proficient in R for statistical analysis and data manipulation. Completed various projects focusing on data cleaning, visualization, and applying statistical models.
+•	Data Analysis Tools: Currently expanding my technical toolkit by learning key software such as Excel for data manipulation, SQL Server for database management, and Power BI for data visualization.
+•	Statistical Methods: Deep understanding of probability theory, statistical inference, and random processes, with practical experience applying these techniques to real-world scenarios.
+Interests
+I have a keen interest in exploring data science and actuarial science, particularly how statistical methodologies can be applied to solve real-world problems. I enjoy staying updated on industry trends and advancements in data analytics, as well as participating in relevant workshops and seminars. My curiosity drives me to enhance my skills continuously and understand how data can influence decision-making in various sectors.
+ 
